@@ -105,6 +105,11 @@
 	   							</div>
    							</div>
    							
+   							<p:commandButton ajax="false" value="Salvar Evento" update="growl" icon="ui-icon-disk" actionListener="#{eventoMB.salva}" styleClass="ui-priority-primary" />
+							<p:button outcome="home.xhtml" value="Voltar para a listagem"></p:button>
+   							
+   							<h2><span class="fa fa-ticket"></span> Ingressos</h2>
+   							
    							<div class="row">
    								<div class="col-sm-12 ui-md-12">
 	   								<p:dataTable var="ingresso" value="#{eventoMB.evento.ingressos}">
@@ -116,6 +121,7 @@
 								                <p:column headerText="ID" />
 								                <p:column headerText="Nome" />
 								                <p:column headerText="Valor" />
+								                <p:column headerText="Ações" />
 								            </p:row>
 								        </p:columnGroup>
 								 
@@ -127,6 +133,9 @@
 								        </p:column>
 								        <p:column>
 								            <h:outputText value="#{ingresso.valor}" />
+								        </p:column>
+								        <p:column>
+								            <p:commandButton ajax="false" value="Remover" update="growl" actionListener="#{eventoMB.removeIngresso(ingresso.id)}" styleClass="ui-priority-primary" />
 								        </p:column>
 								    </p:dataTable>
 								</div>
@@ -141,7 +150,8 @@
 	                            </div>
    							</div>
    							
-   							<p:commandButton ajax="false" value="Salvar" update="growl" actionListener="#{eventoMB.salva}" styleClass="ui-priority-primary" />
+   							<p:commandButton ajax="false" value="Salvar Ingresso e Evento" update="growl" actionListener="#{eventoMB.salva}" icon="ui-icon-disk" styleClass="ui-priority-primary" />
+							<p:button outcome="home.xhtml" value="Voltar para a listagem"></p:button>
    						</h:form>
    					</div>
    				</div>

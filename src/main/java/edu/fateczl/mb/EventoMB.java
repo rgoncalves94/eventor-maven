@@ -164,11 +164,11 @@ public class EventoMB {
 		return ;
 	}
 			
-	public void removeTicket(long idTicket)
+	public void removeIngresso(long idTicket)
 	{
 		em.getTransaction().begin();
 		Ingresso finded = ingressoDAO.find(Ingresso.class, idTicket);
-		System.out.println(finded.getId());
+		System.out.println(finded.getId() + " Toppa");
 		em.remove(finded);
 		em.flush();
 		em.getTransaction().commit();
