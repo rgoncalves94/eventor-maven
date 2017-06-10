@@ -1,0 +1,154 @@
+body { font-size: 16px; font-weight: 300; font-family: "Titillium Web", "Roboto Condensed", "Open Sans", sans-serif; line-height: normal; color: #7b7a82; }
+
+.homepage {
+	background-size: cover;
+	background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/event.jpg');
+}
+
+.site-content {
+	position: relative;
+}
+
+.main-content {
+	position: relative;
+	background-color: #fff;
+	margin: 100px 10%;
+	-webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+}
+
+.event {
+	
+}
+
+.event .event-header {
+	padding: 40px 5%;
+	padding-bottom: 20px;
+	-webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+}
+
+.event .event-header h1 {
+	margin:0;
+}
+
+.event .event-banner {
+	position:relative;
+	margin: 0;
+	padding: 0;
+}
+
+.event .event-banner img {
+	position:relative;
+	width: 100%;
+}
+
+.event .event-banner .info-layer {
+	top: 0;
+	left: 0;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(to right, rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.7)), transparent;
+}
+
+.event .event-banner .info-layer .info-layer-content {
+	position: relative;
+}
+
+.event .event-banner .info-layer .social-media { 
+	margin: 10px;
+	position:relative;
+}
+
+.event .event-banner .info-layer .calendar { 
+	margin: 10px;
+	text-align: center;
+	background: #fff;
+	width: 70px;
+	right: 0;
+}
+
+.event .event-banner .info-layer .calendar .calendar-day{ 
+	font-size: 22pt;
+	font-weight: bold;
+	padding: 0;
+	margin: 0;
+}
+
+.event .event-banner .info-layer .calendar .calendar-month{ 
+	font-size: 14pt;
+	padding: 0;
+	margin: 0;
+}
+	
+.event .event-content {
+	padding: 40px 5%;
+	padding-top: 20px;
+	font-size: 14pt;
+	text-align: justify;
+}
+
+.social-media a { width: 50px; height: 50px; border-radius: 50%; display: inline-block; text-align: center; color: white; font-size: 25px; line-height: 1.8; margin-right: 10px; -webkit-transition: .3s ease; transition: .3s ease; }
+.social-media a.facebook { background-color: #4b66a0; }
+.social-media a.facebook:hover { background-color: #6680b8; }
+.social-media a.twitter { background-color: #5dd7fc; }
+.social-media a.twitter:hover { background-color: #8fe3fd; }
+.social-media a.google-plus { background-color: #d95232; }
+.social-media a.google-plus:hover { background-color: #e1765d; }
+.social-media a.pinterest { background-color: #cc2e3c; }
+.social-media a.pinterest:hover { background-color: #d95460; }
+
+@media screen and (max-width: 416px) {
+	.social-media a { width: 25px; height: 25px; border-radius: 50%; display: inline-block; text-align: center; color: white; font-size: 12.5px; line-height: 1.8; margin-right: 10px; -webkit-transition: .3s ease; transition: .3s ease; }
+
+	.event .event-banner .info-layer .calendar { 
+		margin: 0 10px;
+		width: 35px;
+		right: 0;
+		clear:both;
+	}
+
+	.event .event-banner .info-layer .calendar .calendar-day{ 
+		font-size: 14pt;
+	}
+
+	.event .event-banner .info-layer .calendar .calendar-month{ 
+		font-size: 7pt;
+	}
+	.event .event-header .event-header-title {
+		margin-bottom:10px;
+	}
+	.event .event-header .event-header-title,
+	.event .event-header .event-header-actions {
+		text-align: center!important;
+	}
+	.event .event-content h2, 
+	.event .event-content h3 {
+		text-align: center;
+	}
+
+	.event .event-content .date-hour ,
+	.event .event-content .description ,
+	.event .event-content .owner {
+		margin-top:40px;
+	}
+
+	.event .event-content .date-hour {
+		text-align: center;
+	}
+
+	.main-content {
+		margin: 50px 5px;
+	}
+}
+
+.modal-content {
+	border-radius: 0;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}

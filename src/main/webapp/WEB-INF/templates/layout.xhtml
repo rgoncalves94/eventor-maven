@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+ 
+    <h:head>
+    	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+    	<link type="text/css" rel="stylesheet" href="css/bootstrap-theme.min.css" />
+    	<link type="text/css" rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css" />
+    	<link type="text/css" rel="stylesheet" href="css/app.css" />
+    </h:head>
+ 
+    <h:body>
+ 
+	<div id="page">
+ 
+	    <div class="container" id="header">
+			<ui:insert name="header" >
+			  <ui:include src="header.xhtml" />
+			</ui:insert>
+	    </div>
+ 
+	    <div class="container" id="content">
+	    	<!-- <div class="row">
+    			<h:messages class="col-sm-12 alert alert-danger" globalOnly="true" tooltip="true" layout="list" showDetail="false" showSummary="true"/>
+			</div>
+			 -->
+		  	<ui:insert name="content" >
+		 	  <h3>Nenhum conteúdo adicionado</h3>
+		   	</ui:insert>
+	    </div>
+ 
+	    <div id="footer">
+	    	<ui:insert name="footer" >
+	    	  <ui:include src="footer.xhtml" />
+	    	</ui:insert>
+    	</div>
+ 		
+ 		<div class="scripts">
+	 		<!--  <script type="text/javascript" src="js/jquery-3.2.1.min.js" />-->
+	 		<script type="text/javascript" src="js/bootstrap.min.js" />
+ 		</div>
+   	</div>
+    </h:body>
+</html>

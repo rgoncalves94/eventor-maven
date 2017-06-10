@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:body>
+ 
+    	<ui:composition template="/WEB-INF/templates/layout.xhtml">
+ 
+    		<ui:define name="content">
+   				<div class="col-sm-3">
+   					<div class="info-box">
+		            <span class="info-box-icon bg-aqua"><i class="fa fa-calendar"></i></span>
+		
+		            <div class="info-box-content">
+		              <span class="info-box-text">Total Eventos</span>
+		              <span class="info-box-number">#{eventoMB.totalEventos()}</span>
+		            </div>
+		            <!-- /.info-box-content -->
+		          </div>
+   				</div>
+   				<div class="col-sm-12">
+	    			<h2>Gráficos</h2>
+	    			
+	    			<p:chart type="line" model="#{relatorioMB.getLineChart()}" style="height:300px;"/>
+				</div>
+	    	</ui:define>
+    	</ui:composition>
+ 
+    </h:body>
+ 
+</html>

@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html 
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1" />
+		<link rel="icon" href="images/favicon.png"/>
+		<title>Eventor</title>
+		<!-- Loading third party fonts -->
+		<link href="fonts/titillium/titillium.css" rel="stylesheet" type="text/css"/>
+		<link href="fonts/roboto/roboto.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/bootstrap-theme.min.css"/>
+		<link href="css/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+		<!-- Loading main css file -->
+		<link rel="stylesheet" href="css/style.css" />
+		
+		<!--[if lt IE 9]>
+		<script src="js/ie-support/html5.js"></script>
+		<script src="js/ie-support/respond.js"></script>
+		<![endif]-->
+
+	</h:head>
+
+
+	<h:body class="homepage theme-blue">
+		
+		<div id="site-content">
+			<header class="site-header">
+				<div class="container">
+					<div id="branding">
+						<img src="images/logoe.png" alt="" class="logo" />
+						<h1 class="site-title"><a href="index.html">Eventor</a></h1>
+						<small class="site-description">Creating events easily!</small>
+					</div>
+					<div class="system-sign-in text-right">
+						<button type="button" data-toggle="modal" data-target=".modal-login" class="btn btn-default">
+							<i class="fa fa-check"></i> Sign In
+						</button>
+						<button onclick=" $('html, body').animate({scrollTop: $('.sign-anchor').offset().top-20}, 2000);$('.sign-anchor').focus();" class="btn btn-primary">
+							<i class="fa fa-plus"></i> Sign Up
+						</button>
+					</div>
+				</div>
+			</header> <!-- .site-header -->
+
+			<main class="main-content">
+				<div class="hero">
+					<div class="hero-half-background" data-bg-image="images/bg1-right.jpg"></div>
+					<div class="container">
+						<div class="row">
+							<div class="col-md-5">
+								<div class="hero-content">
+									<h2 class="hero-title">Precisa criar e gerenciar eventos?</h2>
+									<p>
+										O Eventor é especializado na criação de eventos, por isso tenha confiança em criar eventos e gerenciá-los online, atravéz de nossa plataforma.
+									</p>
+									<p>
+										Exemplo: <a href="event.xhtml">Festa Junina</a>
+									</p>
+									<span class="arrow"></span>
+								</div>
+							</div> <!-- .col-md-5 -->
+							<div class="col-md-5 col-md-offset-2">
+								<div class="row">
+									<div class="col-sm-12">
+					    				<h:messages class="alert alert-danger" globalOnly="true" tooltip="true" layout="list" showDetail="false" showSummary="true"/>
+					    			</div>
+								</div>
+								<div class="request-form">
+									<h2 class="text-center">Crie seus eventos agora mesmo!</h2>
+									<h:form>
+										<div class="col-sm-12 text-center">
+											<h4>Para criar o cadastro em nosso site é muito simples e rápido, apenas precisamos que você crie um nome de usuário e uma senha:</h4>
+										</div>
+										<div class="field-column row">
+											<div class="col-sm-6">
+												<div class="field">
+													<label for="#">Usuário:</label>
+													<h:inputText class="sign-anchor" value="#{usuarioMB.usuario.username}" ></h:inputText>
+												</div> <!-- .field -->
+											</div>
+											<div class="col-sm-6">
+												<div class="field">
+													<label for="#">Senha:</label>
+													<h:inputSecret value="#{usuarioMB.usuario.senha}" ></h:inputSecret>
+												</div> <!-- .field -->
+											</div>
+										</div>
+										<h:commandButton class="create-account" action="#{usuarioMB.criaConta}"  value="Criar minha conta"></h:commandButton>
+									</h:form>
+								</div> <!-- .request-form -->
+							</div> <!-- .col-md-5 -->
+						</div> <!-- .row -->
+					</div> <!-- .container -->
+				</div> <!-- .hero -->
+				<div style="background-color:#fcfcfc;" class="fullwidth-block">
+					<div class="container">
+						<header>
+							<h2 class="section-title">Ultimos Eventos</h2>
+						</header>
+						<div class="row">
+							<div class="col-sm-12">
+								<h:form id="form">
+								    <p:dataGrid var="evento" value="#{eventoMB.todosEventos()}" columns="3" layout="grid"
+								        rows="1" paginator="true"
+								        paginatorTemplate=" {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+								        rowsPerPageTemplate="6,12,16">
+								 
+								        <f:facet name="header">
+								            Eventos
+								        </f:facet>
+								        <p:panel header="#{evento.titulo}" style="text-align:center">
+								            <h:panelGrid columns="1" style="width:100%">
+								            	<label for="">Inicio</label>
+								                <h:outputText value="#{evento.inicio}" />
+								                <label for="">Termino</label>
+								                <h:outputText value="#{evento.termino}" />
+								 				<h:form>
+								                	<p:commandButton actionListener="#{eventoMB.visualiza(evento.id)}" value="Ir para a página"></p:commandButton>
+								                </h:form>
+								            </h:panelGrid>
+								        </p:panel>
+								    </p:dataGrid>
+								</h:form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="fullwidth-block">
+					<div class="container">
+						<header>
+							<h2 class="section-title">Como funciona o Eventor?</h2>
+							<p class="section-desc">
+								Muito simples, veja abaixo.
+							</p>
+						</header>
+
+						<div class="row">
+							<div class="col-md-6">
+								<ul class="circle-numbered-feature">
+									<li>
+										<h3>Informe-nos os detalhes</h3>
+										<p>
+											Informe dados como: titulo, descrições, imagens, início e termino do evento e sua localização;
+										</p>
+									</li>
+									<li>
+										<h3>Make your Tickets</h3>
+										<p>
+											Adiciona também todos os tipos de ingressos que você possui disponíveis para que possa ser vendido online;
+										</p>
+									</li>
+									<li>
+										<h3>Compartilhe seu evento</h3>
+										<p>
+											Compartilhe seu evento para toda a internet, as pessoas o encontrarão e comprarão o seu ingresso;
+										</p>
+									</li>
+									<li>
+										<h3>Configure as formas de pagamento</h3>
+										<p>
+											Seus clientes poderão realizar o pagamento diretamente pelo Eventor;
+										</p>
+									</li>
+									<li>
+										<h3> E realize seu evento incrível!</h3>
+										<p>
+											Deixe todo o controle de seu evento e a venda de ingressos no Eventor.
+										</p>
+									</li>
+								</ul>
+							</div>
+							<div class="col-md-5 col-md-offset-1">
+								<figure>
+									<img src="images/event-example.png" alt="" />
+								</figure>
+							</div>
+						</div>
+					</div>
+				</div> <!-- .fullwidth-block -->
+
+			</main> <!-- .main-content -->
+			<div class="modal fade modal-login" role="dialog" tabindex="-1" aria-labelledby="mySmallModalLabel" style="display: none;"> 
+				<div class="modal-dialog modal-sm" role="document"> 
+					<div class="modal-content"> 
+						<div class="modal-header"> 
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">×</span>
+							</button> 
+							<h4 class="modal-title" id="mySmallModalLabel">Identifique-se</h4> 
+						</div> 
+					<div class="modal-body"> 
+						<h:form>
+							<div class="form-group">
+						      	<label for="">Usuário:</label>
+						      	<h:inputText value="#{usuarioMB.usuario.username}" class="form-control" />
+						      </div>
+						      <div class="form-group">
+						      	<label for="">Senha:</label>
+						      	<h:inputSecret value="#{usuarioMB.usuario.senha}" class="form-control" />
+						      </div>
+						      <div class="form-group">
+						      	<h:commandButton action="#{usuarioMB.login}" class="btn btn-success" value="Entrar"/>
+						      </div> 
+						 </h:form>
+					</div> 
+				</div> 
+			  </div> 
+			</div>
+			<footer class="site-footer">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="widget">
+								<h3 class="widget-title">Contact</h3>
+								<strong>Eventor</strong>
+								<address>Av. Águia de Haia, 2983, A.E Carvalho, São Paulo-SP</address>
+								<a href="#">(11) 2049-2600</a> <br />
+								<a href="#">contact@eventor.com</a>
+							</div> <!-- .widget-title -->
+						</div>
+						<div class="col-md-4">
+							<div class="widget">
+								<h3 class="widget-title">Social Media</h3>
+								<div class="social-links">
+									<a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+									<a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+									<a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+									<a href="#" class="pinterest"><i class="fa fa-pinterest"></i></a>
+								</div>
+							</div> <!-- .widget-title -->
+						</div>
+						<div class="col-md-4">
+							<div class="widget">
+								<h3 class="widget-title">Join our newsletter</h3>
+								<form action="#" class="subscribe">
+									<input type="email" placeholder="Enter your email..." />
+									<input type="submit" value="sign up" />
+								</form>
+							</div> <!-- .widget-title -->
+						</div>
+					</div> <!-- .row -->
+					<div class="copy">
+						<p>Copyright 2017 Eventor, the prototype for english presentation!</p>
+					</div>
+				</div> <!-- .container -->
+			</footer> <!-- .site-footer -->
+
+		</div> <!-- #site-content -->
+
+		<script src="js/jquery-3.2.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery-migrate-3.0.0.min.js"></script>
+		<script src="js/plugins.js"></script>
+		<script src="js/app.js"></script>
+	</h:body>
+
+</html>
