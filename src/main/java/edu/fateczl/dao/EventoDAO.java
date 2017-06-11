@@ -35,7 +35,7 @@ public class EventoDAO<T> extends GenericDAOImpl<T>{
 		Query q = em.createQuery("SELECT count(e.id) FROM Evento e WHERE e.dono = :usuario");
 		q.setParameter("usuario", e);
 		
-		return (long) q.getSingleResult();
+		return Long.parseLong((String) q.getSingleResult());
 	}
 	
 	@SuppressWarnings("unchecked")

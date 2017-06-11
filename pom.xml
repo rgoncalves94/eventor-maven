@@ -11,6 +11,12 @@
   
   	<!-- prod -->
   	<dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-servlet</artifactId>
+      <version>9.2.11.v20150529</version>
+    </dependency>
+  	
+  	<dependency>
 	    <groupId>javax.servlet</groupId>
 	    <artifactId>javax.servlet-api</artifactId>
 	    <version>3.1.0</version>
@@ -154,7 +160,6 @@
 					<skip>true</skip>
 				</configuration>
 			</plugin>
-
 		</plugins>
 	</build>
 </project>

@@ -2,6 +2,7 @@ package edu.fateczl.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -47,7 +48,7 @@ public class Ingresso {
 		this.valor = valor;
 	}
 	
-	@ManyToOne(targetEntity=Evento.class)
+	@ManyToOne(targetEntity=Evento.class,cascade=CascadeType.PERSIST)
 	public Evento getEvento() {
 		return evento;
 	}

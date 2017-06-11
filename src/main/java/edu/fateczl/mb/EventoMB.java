@@ -30,6 +30,7 @@ public class EventoMB {
 	private IngressoDAO<Ingresso> ingressoDAO;
 	private EntityManager em = JPAUtil.criaEntityManager();
 	private Ingresso ingresso;
+	private Venda venda;
 	
 	
 	public EventoMB() {
@@ -37,6 +38,7 @@ public class EventoMB {
 		dao = new EventoDAO<Evento>(em);
 		ingresso = new Ingresso();
 		ingressoDAO = new IngressoDAO<Ingresso>(em);
+		venda = new Venda();
 	}
 
 	public Evento getEvento() {
@@ -53,6 +55,14 @@ public class EventoMB {
 
 	public void setIngresso(Ingresso ingresso) {
 		this.ingresso = ingresso;
+	}
+	
+	public Venda getVenda() {
+		return venda;
+	}
+
+	public void setVenda(Venda venda) {
+		this.venda = venda;
 	}
 
 	public void novo() throws IOException

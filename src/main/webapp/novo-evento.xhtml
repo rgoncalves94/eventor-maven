@@ -135,7 +135,9 @@
 								            <h:outputText value="#{ingresso.valor}" />
 								        </p:column>
 								        <p:column>
-								            <p:commandLink value="Remover" outcome="novo-evento.xhtml" action="#{eventoMB.removeIngresso(ingresso.id)}" styleClass="ui-priority-primary" />
+								        	<button type="button" data-ref="#{ingresso.id}" class=" remove-ingresso btn btn-danger" value="remove" >
+								        		<i class="fa fa-times"></i> Remove
+								        	</button>
 								        </p:column>
 								    </p:dataTable>
 								</div>
@@ -171,6 +173,48 @@
 								$(".uf").val(json.uf);
 							});
    	   					});
+
+   	   					$('.remove-ingresso').on('click', function() {
+							var ref = $(this).attr('data-ref');
+
+							if(ref == null || ref == undefined) {
+								alert('falha ao remover, tente novamente mais tarde');
+								return ;
+							}
+   	   	   					
+							$.ajax({
+								'url': 'evento/remove',
+								'dataType': 'json',
+								'type': 'post',
+								'data': {ref:ref}
+							}).done(function(json){
+								console.log(321);
+								if(json.success != undefined) {
+
+									$.confirm({
+									    title: 'Ingresso removido',
+									    content: json.success + " Sua página sera recarregada" ,
+									    type:"green",
+									    buttons: {
+									        confirmar: {
+									            text: 'OK',
+									            btnClass: 'btn-blue',
+									            keys: ['enter'],
+									            action: function(){
+									            	window.location = "novo-evento.xhtml";
+									            }
+									        }
+									    }
+									});
+									
+									return ;
+								}
+								
+								$.alert({title:"Erro", content:"Falha ao excluir o ingresso", type:'red'});
+							}).fail(function(error) {
+								$.alert({title:"Erro", content:"Falha ao excluir o ingresso", type:'red'});
+							});
+	   					});
    	   				});
    				</script>
     		</ui:define>

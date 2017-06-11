@@ -16,6 +16,12 @@ public class Venda {
 	private long id;
 	private Date dtCadastro;
 	private Ingresso ingresso;
+	private Participante participante;
+	
+	public Venda() {
+		ingresso = new Ingresso();
+		participante = new Participante();
+	}
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -41,6 +47,14 @@ public class Venda {
 	
 	public void setIngresso(Ingresso ingresso) {
 		this.ingresso = ingresso;
+	}
+	
+	@ManyToOne(targetEntity=Participante.class)
+	public Participante getParticipante() {
+		return participante;
+	}
+	public void setParticipante(Participante participante) {
+		this.participante = participante;
 	}
 	
 }
