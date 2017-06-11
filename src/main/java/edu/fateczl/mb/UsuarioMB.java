@@ -19,10 +19,12 @@ public class UsuarioMB {
 	private Usuario usuario = new Usuario();
 	private Usuario usuarioLogado = null;
 	private UsuarioDAO<Usuario> dao;
+	private EntityManager em;
 	private String tituloEvento;
 	
 	public UsuarioMB() {
-		dao = new UsuarioDAO<Usuario>(JPAUtil.criaEntityManager());
+		em = JPAUtil.criaEntityManager();
+		dao = new UsuarioDAO<Usuario>(em);
 	}
 
 	public Usuario getUsuario() {
@@ -57,8 +59,9 @@ public class UsuarioMB {
 				) {
 			
 			usuario.setAtivo(true);
-			
+			em.getTransaction().begin();
 			dao.persist(usuario);
+			em.getTransaction().commit();
 			
 			usuarioLogado = usuario.clone();
 			FacesContext.getCurrentInstance().getExternalContext().redirect("home.xhtml");

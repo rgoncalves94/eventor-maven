@@ -26,7 +26,7 @@ public class Venda {
 		this.id = id;
 	}
 	
-	@Column(columnDefinition="datetime")
+	@Column(columnDefinition="timestamp")
 	public Date getDtCadastro() {
 		return dtCadastro;
 	}

@@ -135,7 +135,7 @@
 								            <h:outputText value="#{ingresso.valor}" />
 								        </p:column>
 								        <p:column>
-								            <p:commandButton ajax="false" value="Remover" update="growl" actionListener="#{eventoMB.removeIngresso(ingresso.id)}" styleClass="ui-priority-primary" />
+								            <p:commandLink value="Remover" outcome="novo-evento.xhtml" action="#{eventoMB.removeIngresso(ingresso.id)}" styleClass="ui-priority-primary" />
 								        </p:column>
 								    </p:dataTable>
 								</div>

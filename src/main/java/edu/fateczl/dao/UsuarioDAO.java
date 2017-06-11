@@ -32,7 +32,7 @@ public class UsuarioDAO<T> extends GenericDAOImpl<T>{
 		
 		q.setParameter("username", username);
 		try {
-			return q.getSingleResult() != null;
+			return q.getSingleResult() == null;
 		} catch(Exception e) {
 			return false;
 		}

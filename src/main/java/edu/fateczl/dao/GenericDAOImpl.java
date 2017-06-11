@@ -11,47 +11,23 @@ public class GenericDAOImpl<T>  implements GenericDAO<T> {
 	}
 
 	public void persist(T object) {
-		try {
-			em.getTransaction().begin();
-			em.persist(object);
-			em.flush();
-			em.getTransaction().commit();
-		} catch (Exception e) {
-			em.getTransaction().rollback();
-		}
+		em.persist(object);
+		em.flush();
 	}
 
 	public void refresh(T object) {
-		try {
-			em.getTransaction().begin();
-			em.refresh(object);
-			em.flush();
-			em.getTransaction().commit();
-		} catch (Exception e) {
-			em.getTransaction().rollback();
-		}
+		em.refresh(object);
+		em.flush();
 	}
 	
 	public void merge(T object) {
-		try {
-			em.getTransaction().begin();
-			em.refresh(object);
-			em.flush();
-			em.getTransaction().commit();
-		} catch (Exception e) {
-			em.getTransaction().rollback();
-		}
+		em.refresh(object);
+		em.flush();
 	}
 
 	public void remove(T object) {
-		try {
-			em.getTransaction().begin();
-			em.remove(object);
-			em.flush();
-			em.getTransaction().commit();
-		} catch (Exception e) {
-			em.getTransaction().rollback();
-		}
+		em.remove(object);
+		em.flush();
 	}
 
 	public T find(Class<T> clazz, long id) {

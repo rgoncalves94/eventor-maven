@@ -6,15 +6,33 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class JDBCUtil {
-
+	
+	/*
 	private static String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	private static String JDBC_URL = "jdbc:mysql://localhost/eventor";
 	private static String JDBC_USER = "root";
 	private static String JDBC_PASSWORD = "";
 	private static Driver driver = null;
+	*/
+	/*
+	private static String JDBC_DRIVER = "org.postgresql.Driver";
+	private static String JDBC_URL = "postgresql://localhost:5432/eventor";
+	private static String JDBC_USER = "root";
+	private static String JDBC_PASSWORD = "";
+	private static Driver driver = null;
+	*/
+	
+	private static String JDBC_DRIVER = "org.postgresql.Driver";
+	private static String JDBC_URL = "postgresql://localhost:5432/eventor";
+	private static String JDBC_USER = "root";
+	private static String JDBC_PASSWORD = "";
+	private static Driver driver = null;
+	
+	
+	private static String dbUrl = System.getenv("JDBC_DATABASE_URL");
 
 	public static synchronized Connection getConnection() throws SQLException {
-		if (driver == null) {
+		if (dbUrl == null) {
 			try {
 				Class jdbcDriverClass = Class.forName(JDBC_DRIVER);
 				driver = (Driver) jdbcDriverClass.newInstance();
@@ -24,7 +42,7 @@ public class JDBCUtil {
 				e.printStackTrace();
 			}
 		}
-		return DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
+		return DriverManager.getConnection(dbUrl);
 	}
 
 	public static void close(Connection conn) {

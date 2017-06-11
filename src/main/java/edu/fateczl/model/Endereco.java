@@ -40,7 +40,7 @@ public class Endereco {
 		this.dtCadastro = dtCadastro;
 	}
 	
-	@Column(columnDefinition="datetime")
+	@Column(columnDefinition="timestamp")
 	public Date getDtAlteracao() {
 		return dtAlteracao;
 	}

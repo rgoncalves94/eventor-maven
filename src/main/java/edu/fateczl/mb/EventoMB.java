@@ -95,11 +95,6 @@ public class EventoMB {
 		FacesContext.getCurrentInstance().getExternalContext().redirect("novo-evento.xhtml");
 	}
 	
-	public void relatorio(long id)
-	{
-	}
-			
-	
 	public void salva() throws IOException
 	{
 		Map<String, Object> session = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
@@ -123,8 +118,6 @@ public class EventoMB {
 			efinded.setTermino(evento.getTermino());
 			efinded.setLocalizacao(evento.getLocalizacao());
 			
-			em.getTransaction().commit();
-			
 			if((ingresso.getDescricao() != null || ingresso.getDescricao() != "")
 				&& ingresso.getValor() > 0.0) {
 				ingresso.setEvento(efinded);
@@ -132,6 +125,9 @@ public class EventoMB {
 				
 				evento.getIngressos().add(ingresso);
 			}
+			
+			em.getTransaction().commit();
+			
 			ingresso = new Ingresso();
 			
 			FacesContext fc = FacesContext.getCurrentInstance();
@@ -144,6 +140,8 @@ public class EventoMB {
 			return ;
 		}
 		
+		em.getTransaction().begin();
+		
 		dao.persist(evento);
 		
 		if((ingresso.getDescricao() != null || ingresso.getDescricao() != "")
@@ -152,6 +150,9 @@ public class EventoMB {
 			ingressoDAO.persist(ingresso);
 			evento.getIngressos().add(ingresso);
 		}
+		
+		em.getTransaction().commit();
+		
 		ingresso = new Ingresso();
 		
 		FacesContext fc = FacesContext.getCurrentInstance();
@@ -166,18 +167,44 @@ public class EventoMB {
 			
 	public void removeIngresso(long idTicket)
 	{
-		em.getTransaction().begin();
-		Ingresso finded = ingressoDAO.find(Ingresso.class, idTicket);
-		System.out.println(finded.getId() + " Toppa");
-		em.remove(finded);
-		em.flush();
-		em.getTransaction().commit();
-		System.out.println("removido");
+		try {
+			em.getTransaction().begin();
+			Ingresso finded = ingressoDAO.find(Ingresso.class, idTicket);
+			System.out.println(finded.getId() + " Toppa");
+			ingressoDAO.remove(finded);
+			em.getTransaction().commit();
+			System.out.println("removido");
+		} catch(Exception e) {
+			em.getTransaction().rollback();
+			System.out.println("rolling back");
+		}
 	}
 	
 	public void visualiza(long id) throws IOException
 	{
 		evento = dao.find(Evento.class, id);
+		FacesContext.getCurrentInstance().getExternalContext().redirect("event.xhtml");
+	}
+	
+	public void registraVenda(long ticket) throws IOException
+	{
+		Ingresso ingresso = ingressoDAO.find(Ingresso.class, ticket);
+		
+		Venda venda = new Venda();
+		venda.setDtCadastro(new Date());
+		venda.setIngresso(ingresso);
+		VendaDAO<Venda> vendaDAO = new VendaDAO<Venda>(em);
+		em.getTransaction().begin();
+		vendaDAO.persist(venda);
+		em.getTransaction().commit();
+		
+		FacesContext fc = FacesContext.getCurrentInstance();
+		FacesMessage msg = 
+				new FacesMessage(FacesMessage.SEVERITY_INFO,
+				"Compra efetuada", 
+				"O ingresso foi vendido com sucesso.");
+		fc.addMessage(null, msg);
+		
 		FacesContext.getCurrentInstance().getExternalContext().redirect("event.xhtml");
 	}
 	
@@ -202,24 +229,4 @@ public class EventoMB {
         }
         return month.substring(0, 3);
     }
-	
-	public void registraVenda(long ticket) throws IOException
-	{
-		Ingresso ingresso = ingressoDAO.find(Ingresso.class, ticket);
-		
-		Venda venda = new Venda();
-		venda.setDtCadastro(new Date());
-		venda.setIngresso(ingresso);
-		VendaDAO<Venda> vendaDAO = new VendaDAO<Venda>(em);
-		vendaDAO.persist(venda);
-		
-		FacesContext fc = FacesContext.getCurrentInstance();
-		FacesMessage msg = 
-				new FacesMessage(FacesMessage.SEVERITY_INFO,
-				"Compra efetuada", 
-				"O ingresso foi vendido com sucesso.");
-		fc.addMessage(null, msg);
-		
-		FacesContext.getCurrentInstance().getExternalContext().redirect("event.xhtml");
-	}
 }

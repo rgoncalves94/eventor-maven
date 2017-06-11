@@ -9,6 +9,8 @@
         </description>
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <properties>
+        	<!-- MySQL Local Enviroment -->
+        	<!-- 
         	
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/eventor" />
@@ -18,7 +20,8 @@
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.hbm2ddl.auto" value="create" />
-            
+            -->
+            <!-- PostgreSQL Local Enviroment -->
             <!-- 
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/eventor" />
@@ -27,8 +30,19 @@
 			
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
             <property name="hibernate.show_sql" value="true" />
-            <property name="hibernate.hbm2ddl.auto" value="update" />
-             -->
+            <property name="hibernate.hbm2ddl.auto" value="create" />
+            
+            -->
+            
+            <!-- Heroku PostgreSQL Enviroment -->
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+            <property name="javax.persistence.jdbc.url" value="#{System.getenv('JDBC_DATABASE_URL')}" />
+            <!-- <property name="javax.persistence.jdbc.user" value="postgres" /> -->
+            <!-- <property name="javax.persistence.jdbc.password" value="root" /> -->
+			
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.hbm2ddl.auto" value="create" />
         </properties>
 
     </persistence-unit>

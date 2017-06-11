@@ -52,7 +52,7 @@ public class Evento {
 		this.dtCadastro = dtCadastro;
 	}
 	
-	@Column(columnDefinition="datetime")
+	@Column(columnDefinition="timestamp")
 	public Date getDtAlteracao() {
 		return dtAlteracao;
 	}
@@ -75,7 +75,7 @@ public class Evento {
 		this.localizacao = localizacao;
 	}
 	
-	@Column(columnDefinition="datetime")
+	@Column(columnDefinition="timestamp")
 	public Date getInicio() {
 		return inicio;
 	}
@@ -84,7 +84,7 @@ public class Evento {
 		this.inicio = inicio;
 	}
 	
-	@Column(columnDefinition="datetime")
+	@Column(columnDefinition="timestamp")
 	public Date getTermino() {
 		return termino;
 	}
