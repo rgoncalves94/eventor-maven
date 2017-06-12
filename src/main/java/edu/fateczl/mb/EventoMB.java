@@ -198,9 +198,7 @@ public class EventoMB {
 	
 	public void registraVenda() throws IOException
 	{
-		Venda venda = new Venda();
 		venda.setDtCadastro(new Date());
-		venda.setIngresso(ingresso);
 		VendaDAO<Venda> vendaDAO = new VendaDAO<Venda>(em);
 		em.getTransaction().begin();
 		vendaDAO.persist(venda);
