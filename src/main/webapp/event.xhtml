@@ -72,14 +72,14 @@
 						<div class="row">
 							<div class="col-sm-4">
 								<div class="localization">
-									<h3>Localization</h3>
+									<h3>Localização:</h3>
 									<iframe src="https://www.google.com/maps/embed?pb=#{eventoMB.evento.localizacao.toString()}" width="100%" height="auto" frameborder="0" style="border:0"></iframe>
 									<p>
 										#{eventoMB.evento.localizacao.toString()}
 									</p>
 								</div>
 								<div class="date-hour">
-									<h3>Date / Hour</h3>
+									<h3>Data / Hora</h3>
 									<p>
 										<i class="fa fa-hourglass-start"></i> #{eventoMB.evento.inicio} <br />
 										<i class="fa fa-hourglass-end"></i> #{eventoMB.evento.termino}
@@ -88,7 +88,7 @@
 							</div>
 							<div class="col-sm-8">
 								<div class="description">
-									<h2>Description</h2>
+									<h2>Descrição</h2>
 									<h:outputText value="#{eventoMB.evento.descricao}" escape="false"/>
 								</div>
 							</div>
@@ -111,47 +111,44 @@
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
 		        <h4 class="modal-title">Comprar ingresso</h4>
 		      </div>
-		      <div class="modal-body">
-		      	<h:form>
+		      <h:form>
+		      	<div class="modal-body">
 			      	<h3>Dados do comprador</h3>
 			      	<p:messages id="msgs" />
 					<div class="row">
 	   					<div class="col-sm-6 ui-md-6">
 		   					<div class="form-group">
-		   						<p:inputText required="true" label="Nome do comprador" value="#{eventoMB.venda.participante.nome}" />
+		   						<h:outputLabel>Nome do Comprador:</h:outputLabel>
+		   						<p:inputText styleClass="form-control" required="true" label="Nome do comprador" value="#{eventoMB.venda.participante.nome}" />
 		   					</div>
 	   					</div>
    						<div class="col-sm-6 ui-md-6">
 	   						<div class="form-group">
-	   							<p:inputMask required="true" label="Celular" value="#{eventoMB.venda.participante.nome}" mask="(99) 99999-9999"/>
+	   							<h:outputLabel>Celular:</h:outputLabel>
+	   							<p:inputMask styleClass="form-control" required="true" label="Celular" value="#{eventoMB.venda.participante.nome}" mask="(99) 99999-9999"/>
 	   						</div>
    						</div>
    						<div class="col-sm-6 ui-md-6">
 	   						<div class="form-group">
-	   							<p:inputText required="true" label="Email" value="#{eventoMB.venda.participante.email}" />
+	   							<h:outputLabel>Email:</h:outputLabel>
+	   							<p:inputText styleClass="form-control" required="true" label="Email" value="#{eventoMB.venda.participante.email}" />
 	   						</div>
    						</div>
+   						<div class="col-sm-6 ui-md-6">
+	   						<div class="form-group">
+	   							<h:outputLabel>Escolha o ingresso:</h:outputLabel>
+						        <h:selectOneMenu styleClass="form-control" value="#{eventoMB.venda.ingresso.id}">
+								    <f:selectItems value="#{eventoMB.evento.ingressos}" var="ingr" itemLabel="#{ingr.descricao} - R$ #{ingr.valor}" itemValue="#{ingr.id}" />
+								</h:selectOneMenu>
+							</div>
+   						</div>
   					</div>
-  					<h3>Custom Layout</h3>
-				    <p:outputPanel id="customPanel" style="margin-bottom:10px">
-				        <p:selectOneRadio id="customRadio" value="#{eventoMB.venda.ingresso.id}" layout="custom">
-				            <x:forEach var="ing" items="#{eventoMB.evento.ingressos}">
-				            	<f:selectItem itemValue="#{ing.id}">
-				            		<h:outputText value="#{ing.descricao}" /> - 
-					            	<h:outputText value="#{ing.valor}" >
-							        	<f:convertNumber maxFractionDigits="2" currencySymbol="R$" integerOnly="true" locale="pt-br"/>
-							        </h:outputText>
-				            	</f:selectItem>
-				            </x:forEach>
-							    
-				        </p:selectOneRadio>
-				    </p:outputPanel>
-				</h:form>
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-		        <button type="button" class="btn btn-success" data-dismiss="modal"><i class="fa fa-ticket"></i> Buy!</button>
-		      </div>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Fechar</button>
+			        <p:commandButton ajax="false" styleClass="btn btn-success" value="Comprar" actionListener="#{eventoMB.registraVenda}"></p:commandButton>
+			      </div>
+		      </h:form>
 		    </div><!-- /.modal-content -->
 		  </div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->

@@ -196,10 +196,8 @@ public class EventoMB {
 		FacesContext.getCurrentInstance().getExternalContext().redirect("event.xhtml");
 	}
 	
-	public void registraVenda(long ticket) throws IOException
+	public void registraVenda() throws IOException
 	{
-		Ingresso ingresso = ingressoDAO.find(Ingresso.class, ticket);
-		
 		Venda venda = new Venda();
 		venda.setDtCadastro(new Date());
 		venda.setIngresso(ingresso);

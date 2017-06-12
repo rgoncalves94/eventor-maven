@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -102,7 +103,7 @@ public class Evento {
 		this.descricao = descricao;
 	}
 	
-	@OneToMany(targetEntity=Ingresso.class)
+	@OneToMany(targetEntity=Ingresso.class, fetch=FetchType.EAGER)
 	@JoinColumn(name="evento_id")
 	public List<Ingresso> getIngressos() {
 		return ingressos;
