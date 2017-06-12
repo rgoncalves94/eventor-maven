@@ -116,7 +116,7 @@
     </dependency>
   </dependencies>
   
-    <build>
+  <!-- <build>
     <plugins>
       <plugin>
         <groupId>com.heroku.sdk</groupId>
@@ -148,9 +148,9 @@
         </executions>
       </plugin>
     </plugins>
-  </build>
+  </build>-->
   
-  <!-- <build>
+   <build>
 		<finalName>eventor</finalName>
 		<outputDirectory>${basedir}/src/main/webapp/WEB-INF/classes</outputDirectory>
 		<plugins>
@@ -194,6 +194,27 @@
 					<skip>true</skip>
 				</configuration>
 			</plugin>
-		</plugins>
-	</build>-->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>2.3</version>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals><goal>copy</goal></goals>
+                    <configuration>
+                        <artifactItems>
+                            <artifactItem>
+                                <groupId>com.github.jsimone</groupId>
+                                <artifactId>webapp-runner</artifactId>
+                                <version>8.5.11.3</version>
+                                <destFileName>webapp-runner.jar</destFileName>
+                            </artifactItem>
+                        </artifactItems>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
 </project>
