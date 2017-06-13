@@ -11,8 +11,13 @@
  
 			<h:form>  
 			    <p:growl id="messages"/>
-			 
-			    <p:menubar>
+			 	
+			    <p:menubar styleClass="header">
+			    	<p:menuitem>
+			    		<h:link outcome="index.xhmtl">
+							<h:graphicImage styleClass="padding-r-20" url="images/logoe.png" height="30px" />
+						</h:link>
+					</p:menuitem>
 			 		<p:menuitem value="Início" url="home.xhtml" icon="fa fa-home" />
 			 		<p:menuitem value="Novo Evento" action="#{eventoMB.novo()}" icon="fa fa-calendar" />
 			        <f:facet name="options">
