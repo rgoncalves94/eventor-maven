@@ -3,7 +3,8 @@
 		xmlns:f="http://java.sun.com/jsf/core"
 		xmlns:h="http://java.sun.com/jsf/html"
 		xmlns:p="http://primefaces.org/ui"
-		xmlns:ui="http://java.sun.com/jsf/facelets">
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
 	<h:head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -113,7 +114,12 @@
 								        </f:facet>
 								        <p:panel styleClass="text-center" header="#{evento.titulo}" style="text-align:center!important">
 								            <h:panelGrid columns="1" style="width:100%">
-							            		<p:graphicImage styleClass="img-responsive" stream="false" value="${eventoMB.bannerToImage()}"></p:graphicImage>
+								            	<c:if test="#{not empty eventoMB.bannerToImage(evento.id)}">
+							            			<p:graphicImage styleClass="img-responsive" stream="false" value="#{eventoMB.bannerToImage(evento.id)}"></p:graphicImage>
+							            		</c:if>
+							            		<c:if test="#{empty eventoMB.bannerToImage(evento.id)}">
+							            			<h:outputText value="Sem imagem" />
+							            		</c:if>
 							            		<br />
 								            	<i class="fa fa-hourglass-start"></i> Início: 
 												<h:outputText styleClass="text-center" value="#{evento.inicio}" >

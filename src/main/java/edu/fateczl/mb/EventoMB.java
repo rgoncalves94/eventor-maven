@@ -98,6 +98,15 @@ public class EventoMB {
         return new DefaultStreamedContent(new ByteArrayInputStream(evento.getBanner()), "image/jpg");
 	}
 	
+	public StreamedContent bannerToImage(long id) {
+		Evento e = dao.find(Evento.class, id);
+		if(e == null)
+			return null;
+		if(e.getBanner() == null)
+			return null;
+        return new DefaultStreamedContent(new ByteArrayInputStream(evento.getBanner()), "image/jpg");
+	}
+	
 	public void novo() throws IOException {
 		evento = new Evento();
 		FacesContext.getCurrentInstance().getExternalContext().redirect("novo-evento.xhtml");
@@ -218,6 +227,7 @@ public class EventoMB {
 
 	public void visualiza(long id) throws IOException {
 		evento = dao.find(Evento.class, id);
+		System.out.println(evento.toString());
 		FacesContext.getCurrentInstance().getExternalContext().redirect("event.xhtml");
 	}
 
