@@ -50,7 +50,8 @@
 						</div>
 					</div>
 					<div class="event-banner">
-						<img src="images/event-banner.jpg" class="" alt="" />
+						<!-- <img src="images/event-banner.jpg" class="" alt="" /> -->
+						<p:graphicImage styleClass="img-responsive" stream="false" value="${eventoMB.bannerToImage()}"></p:graphicImage>
 						<div class="info-layer">
 							<div class="info-layer-content">
 								<div class="calendar pull-right">
@@ -81,8 +82,14 @@
 								<div class="date-hour">
 									<h3>Data / Hora</h3>
 									<p>
-										<i class="fa fa-hourglass-start"></i> #{eventoMB.evento.inicio} <br />
-										<i class="fa fa-hourglass-end"></i> #{eventoMB.evento.termino}
+										<i class="fa fa-hourglass-start"></i> 
+										<h:outputText value="#{eventoMB.evento.inicio}" >
+											<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+										</h:outputText> <br />
+										<i class="fa fa-hourglass-end"></i> 
+										<h:outputText value="#{eventoMB.evento.termino}" >
+											<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+										</h:outputText> <br />
 									</p>
 								</div>
 							</div>
@@ -113,7 +120,6 @@
 		      </div>
 		      <h:form>
 		      	<div class="modal-body">
-			      	<h3>Dados do comprador</h3>
 			      	<p:messages id="msgs" />
 					<div class="row">
 	   					<div class="col-sm-6 ui-md-6">
@@ -125,7 +131,7 @@
    						<div class="col-sm-6 ui-md-6">
 	   						<div class="form-group">
 	   							<h:outputLabel>Celular:</h:outputLabel>
-	   							<p:inputMask styleClass="form-control" required="true" label="Celular" value="#{eventoMB.venda.participante.nome}" mask="(99) 99999-9999"/>
+	   							<p:inputMask styleClass="form-control" required="true" label="Celular" value="#{eventoMB.venda.participante.celular}" mask="(99) 99999-9999"/>
 	   						</div>
    						</div>
    						<div class="col-sm-6 ui-md-6">

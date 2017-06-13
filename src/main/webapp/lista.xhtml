@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:body>
+ 
+    	<ui:composition template="/WEB-INF/templates/layout.xhtml">
+ 
+    		<ui:define name="content">
+    			<div class="col-sm-8">
+    				<h2>Listagem Participantes</h2>
+    			</div>
+    			<div class="col-sm-4 text-right">
+    				<br />
+    				<input type="button" id="export-excel" class="btn btn-success" value="Exportar para excel"/>
+    			</div>
+   				<div class="col-sm-12">
+	    			<p:dataTable id="participantes" styleClass="participantes" var="participante" value="#{eventoMB.participantes}">
+	    			
+					    <p:column headerText="#">
+					        <h:outputText value="#{participante.id}" />
+					    </p:column>
+					    
+					    <p:column headerText="Nome">
+					        <h:outputText value="#{participante.nome}" />
+					    </p:column>
+					 
+					    <p:column headerText="Celular">
+					        <h:outputText value="#{participante.celular}" />
+					    </p:column>
+					 
+					    <p:column headerText="Email">
+					        <h:outputText value="#{participante.email}" />
+					    </p:column>
+					</p:dataTable>
+				</div>
+				<form target="_blank" id="excelForm" name="excelForm" method="post" action="/eventor/excel">
+				    <input type="hidden" name="excelExport" id="excelExport" />
+				</form>
+				<script>
+					document.getElementById("export-excel").onclick = function(){
+	
+					    var html = document.getElementById("participantes").innerHTML;
+	
+					    document.getElementById("excelExport").value = html;
+	
+					    document.getElementById("excelForm").submit();
+					};
+				</script>
+	    	</ui:define>
+    	</ui:composition>
+ 
+    </h:body>
+ 
+</html>

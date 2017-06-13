@@ -25,7 +25,14 @@
    				<div class="col-sm-12">
 	    			<h2>Gráficos</h2>
 	    			
+	    			<h4>Reais x Data</h4>
 	    			<p:chart type="line" model="#{relatorioMB.getLineChart()}" style="height:300px;"/>
+	    			
+	    			<h4>Qtde. Ingressos Vendidos</h4>
+	    			<p:chart type="bar" model="#{relatorioMB.getBarChart()}" style="height:300px"/>
+	    			
+	    			<h4>Arrecadacao Total</h4>
+	    			<p:chart type="bar" model="#{relatorioMB.getBarChartArrecadacao()}" style="height:300px"/>
 				</div>
 	    	</ui:define>
     	</ui:composition>

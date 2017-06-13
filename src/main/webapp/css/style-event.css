@@ -2,7 +2,7 @@ body { font-size: 16px; font-weight: 300; font-family: "Titillium Web", "Roboto 
 
 .homepage {
 	background-size: cover;
-	background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/event.jpg');
+	background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
 }
 
 .site-content {

@@ -14,6 +14,7 @@ import javax.persistence.EntityManager;
 
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.CategoryAxis;
 import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.LineChartModel;
@@ -30,6 +31,9 @@ public class RelatorioMB {
 	private Map<String, List<Map<String, String>>> lista;
 	private List<String> chaves;
 	
+	private Map<String, String> bars;
+	private Map<String, String> totalArrecadado;
+	
 	public Evento getEvento() {
 		return evento;
 	}
@@ -45,6 +49,8 @@ public class RelatorioMB {
 		Evento evento = dao.find(Evento.class, idEvento);
 		
 		List<Map<String, String>> provList = dao.selecionaToRelatorio(evento);
+		
+		List<Map<String, String>> arrecadacaoTotal = dao.selecionaArrecadacaoTotal(evento);
 		em.getTransaction().commit();
 		
 		chaves= new ArrayList<String>();
@@ -59,6 +65,13 @@ public class RelatorioMB {
 				chaves.add(dados.get("descricao"));
 				
 			}
+		}
+		
+		bars = new HashMap<String, String>();
+		totalArrecadado = new HashMap<String, String>();
+		for(Map<String, String> arrecadacao : arrecadacaoTotal) {
+			bars.put(arrecadacao.get("descricao"), arrecadacao.get("total"));
+			totalArrecadado.put(arrecadacao.get("descricao"), arrecadacao.get("arrecadacao"));
 		}
 		
 		FacesContext.getCurrentInstance().getExternalContext().redirect("relatorio.xhtml");
@@ -96,6 +109,66 @@ public class RelatorioMB {
         yAxis.setLabel("Reais");
         yAxis.setMin(0);
         yAxis.setMax(maiorValor);
+        
+        return model;
+	}
+	
+	public BarChartModel getBarChart() {
+		BarChartModel model = new BarChartModel();
+		
+		int max = 0;
+		for(String key : bars.keySet()) {
+			ChartSeries ingressosVendidos = new ChartSeries();
+			ingressosVendidos.setLabel(key); 
+			
+			String value = bars.get(key);
+			ingressosVendidos.set("Ingressos", Integer.parseInt(value));
+			max += Integer.parseInt(value);
+			
+			model.addSeries(ingressosVendidos);
+		}
+		
+        
+        
+        model.setTitle("Ingressos Vendidos");
+        model.setLegendPosition("ne");
+         
+        Axis xAxis = model.getAxis(AxisType.X);
+        xAxis.setLabel("Ticket");
+         
+        Axis yAxis = model.getAxis(AxisType.Y);
+        yAxis.setLabel("Quantidade");
+        yAxis.setMin(0);
+        yAxis.setMax(max);
+        
+        return model;
+	}
+	
+	public BarChartModel getBarChartArrecadacao() {
+		BarChartModel model = new BarChartModel();
+		
+		double max = 0;
+		for(String key : totalArrecadado.keySet()) {
+			ChartSeries ingressosVendidos = new ChartSeries();
+			ingressosVendidos.setLabel(key);
+			
+			String value = totalArrecadado.get(key);
+			ingressosVendidos.set("Ingressos", Double.parseDouble(value));
+			
+			max += Double.parseDouble(value);
+			model.addSeries(ingressosVendidos);
+		}
+        
+        model.setTitle("Total Arrecada por Ingresso");
+        model.setLegendPosition("ne");
+         
+        Axis xAxis = model.getAxis(AxisType.X);
+        xAxis.setLabel("Ticket");
+         
+        Axis yAxis = model.getAxis(AxisType.Y);
+        yAxis.setLabel("Valor R$");
+        yAxis.setMin(0);
+        yAxis.setMax(max);
         
         return model;
 	}

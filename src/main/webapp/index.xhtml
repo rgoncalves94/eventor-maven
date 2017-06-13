@@ -114,12 +114,18 @@
 								        <f:facet name="header">
 								            Eventos
 								        </f:facet>
-								        <p:panel header="#{evento.titulo}" style="text-align:center">
+								        <p:panel styleClass="text-center" header="#{evento.titulo}" style="text-align:center!important">
 								            <h:panelGrid columns="1" style="width:100%">
-								            	<label for="">Inicio</label>
-								                <h:outputText value="#{evento.inicio}" />
-								                <label for="">Termino</label>
-								                <h:outputText value="#{evento.termino}" />
+							            		<p:graphicImage styleClass="img-responsive" stream="false" value="${eventoMB.bannerToImage()}"></p:graphicImage>
+							            		<br />
+								            	<i class="fa fa-hourglass-start"></i> Início: 
+												<h:outputText styleClass="text-center" value="#{evento.inicio}" >
+													<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+												</h:outputText>
+												<i class="fa fa-hourglass-end"></i> Término: 
+												<h:outputText styleClass="text-center" value="#{evento.termino}" >
+													<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+												</h:outputText>
 								 				<h:form>
 								                	<p:commandButton actionListener="#{eventoMB.visualiza(evento.id)}" value="Ir para a página"></p:commandButton>
 								                </h:form>

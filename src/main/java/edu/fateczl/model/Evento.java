@@ -1,5 +1,6 @@
 package edu.fateczl.model;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +17,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
+
 @Table(name="evento")
 @Entity
 public class Evento {
@@ -31,6 +35,8 @@ public class Evento {
 	private List<Ingresso> ingressos;
 	private String nomeOrganizador;
 	private Usuario dono;
+	
+	private byte[] banner;
 	
 	public Evento() {
 		localizacao = new Endereco();
@@ -127,6 +133,15 @@ public class Evento {
 	public void setNomeOrganizador(String nomeOrganizador) {
 		this.nomeOrganizador = nomeOrganizador;
 	}
+	
+	@Column(columnDefinition="longblob")
+	public byte[] getBanner() {
+		return banner;
+	}
+
+	public void setBanner(byte[] banner) {
+		this.banner = banner;
+	}
 
 	@Override
 	public String toString()
@@ -136,6 +151,7 @@ public class Evento {
 		sb.append("dtCadastro:" + String.valueOf(dtCadastro) + "\n");
 		sb.append("dtAlteracao:" + String.valueOf(dtAlteracao) + "\n");
 		sb.append("titulo:" + titulo + "\n");
+		sb.append("banner:" + banner.toString() + "\n");
 		sb.append("endereco.id:" + String.valueOf(localizacao.getId()) + "\n");
 		sb.append("endereco.cep:" + localizacao.getCep() + "\n");
 		sb.append("endereco.logradouro:" + localizacao.getLogradouro() + "\n");
@@ -152,5 +168,5 @@ public class Evento {
 		
 		return sb.toString();
 	}
-	
+
 }

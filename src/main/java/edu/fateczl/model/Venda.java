@@ -2,6 +2,7 @@ package edu.fateczl.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,7 +41,7 @@ public class Venda {
 		this.dtCadastro = dtCadastro;
 	}
 	
-	@ManyToOne(targetEntity=Ingresso.class)
+	@ManyToOne(targetEntity=Ingresso.class, cascade={CascadeType.ALL})
 	public Ingresso getIngresso() {
 		return ingresso;
 	}

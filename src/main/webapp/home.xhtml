@@ -51,6 +51,9 @@
 					        <h:form>
 					        	<p:commandButton value="Relatório" actionListener="#{relatorioMB.carregaRelatorio(evento.id)}" ajax="false" />
 					        </h:form>
+					        <h:form>
+					        	<p:commandButton value="Ver Clientes" actionListener="#{eventoMB.carregaClientes(evento.id)}" ajax="false" />
+					        </h:form>
 					    </p:column>
 					</p:dataTable>
 				</div>
